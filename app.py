@@ -13,7 +13,9 @@ import os
 
 app = Flask(__name__)
 
-model = YOLO("best.pt")
+model = YOLO("best.pt", task="detect") 
+model.fuse() 
+model.to("cpu")
 
 UPLOAD_FOLDER = "static/uploads"
 RESULT_FOLDER = "static/results"
@@ -30,6 +32,12 @@ def index():
         file = request.files["image"]
         upload_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(upload_path)
+
+        from PIL import Image
+
+        img = Image.open(upload_path).convert("RGB")
+        img.thumbnail((640, 640))
+        img.save(upload_path, optimize=True, quality=70)
 
         results = model(upload_path)
 
