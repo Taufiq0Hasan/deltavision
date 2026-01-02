@@ -3,5 +3,6 @@ ultralytics
 opencv-python-headless
 torch==2.1.0+cpu
 torchvision==0.16.0+cpu
+numpy<2
 --extra-index-url https://download.pytorch.org/whl/cpu
 gunicorn
