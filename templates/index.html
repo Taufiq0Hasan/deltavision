@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DentalVision</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header>
+    <h1>🦷 DentalVision</h1>
+    <p>Automatic Dental X-Ray Analysis</p>
+  </header>
+
+  <section class="upload-card">
+    <h2>Upload X-Ray Image</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <label class="file-box">
+  <input type="file" name="image" accept="image/*" required
+         onchange="document.getElementById('file-name').innerText = this.files[0].name">
+  <span>Choose Image</span>
+</label>
+
+<span id="file-name" class="file-name">No file selected</span>
+
+      <button type="submit">Run Detection</button>
+    </form>
+  </section>
+
+  {% if result_image %}
+  <section class="result-card">
+    <h2>Analysis Result</h2>
+    <div class="image-container">
+      <img src="{{ result_image }}">
+    </div>
+
+    {% if stats %}
+    <div class="stats-panel">
+      <h3>Detection Confidence</h3>
+
+      {% for label, value in stats.items() %}
+      <div class="stat-row">
+        <span>{{ label }}</span>
+        <div class="bar">
+          <div class="fill" style="width: {{ value }}%"></div>
+        </div>
+        <span>{{ value }}%</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+</div>
+
+</body>
+</html>
