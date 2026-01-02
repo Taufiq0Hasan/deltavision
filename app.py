@@ -41,6 +41,10 @@ def index():
 
         results = model(upload_path)
 
+        import gc
+        del results
+        gc.collect()
+
         result_path = os.path.join(RESULT_FOLDER, file.filename)
         results[0].save(filename=result_path)
         result_image = result_path
