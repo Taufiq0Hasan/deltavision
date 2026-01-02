@@ -1,4 +1,4 @@
-ARG CACHEBUST=1
+ARG CACHEBUST=2
 FROM python:3.11-slim
 
 WORKDIR /app
