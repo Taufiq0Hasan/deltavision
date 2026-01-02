@@ -1,7 +1,4 @@
-import subprocess, sys
 
-subprocess.run([sys.executable, "-m", "pip", "install", "numpy==1.26.4"], check=True)
-import numpy as np
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
